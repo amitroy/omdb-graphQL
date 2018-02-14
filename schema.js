@@ -7,11 +7,7 @@ const {
     GraphQLList
 } = require('graphql')
 
-/* fetch('http://www.omdbapi.com/?s=their&apikey=435a21f')
-    .then(response => {
-        return response.json();
-    }); */
-
+const API_KEY = '435a21f';
 
 const MovieType = new GraphQLObjectType({
     name: 'Movie',
@@ -62,7 +58,7 @@ module.exports = new GraphQLSchema({
                         type: GraphQLString
                     },
                 },
-                resolve: (root, args) => fetch(`http://www.omdbapi.com/?s=${encodeURI(args.movieTitle)}&apikey=435a21f`)
+                resolve: (root, args) => fetch(`http://www.omdbapi.com/?s=${encodeURI(args.movieTitle)}&apikey=${API_KEY}`)
                     .then(response => response.text())
                     .then(textResponse => JSON.parse(textResponse).Search)
 
